@@ -1,0 +1,54 @@
+[
+{
+  "model": "main.product",
+  "pk": 1,
+  "fields": {
+    "name": "Куриная грудка",
+    "description": "филе",
+    "image": "",
+    "category": 1,
+    "price": 250,
+    "created_at": "2024-03-08T15:45:55.211Z",
+    "updated_at": "2024-03-08T15:45:55.211Z"
+  }
+},
+{
+  "model": "main.product",
+  "pk": 2,
+  "fields": {
+    "name": "Свинина",
+    "description": "еда",
+    "image": "",
+    "category": 1,
+    "price": 300,
+    "created_at": "2024-03-08T16:02:34.153Z",
+    "updated_at": "2024-03-08T16:02:34.153Z"
+  }
+},
+{
+  "model": "main.product",
+  "pk": 3,
+  "fields": {
+    "name": "Яблоко",
+    "description": "еда",
+    "image": "",
+    "category": 2,
+    "price": 60,
+    "created_at": "2024-03-08T16:02:47.883Z",
+    "updated_at": "2024-03-08T16:02:47.883Z"
+  }
+},
+{
+  "model": "main.product",
+  "pk": 4,
+  "fields": {
+    "name": "Огурец",
+    "description": "Еда",
+    "image": "",
+    "category": 3,
+    "price": 60,
+    "created_at": "2024-03-08T16:11:05.261Z",
+    "updated_at": "2024-03-08T16:11:05.261Z"
+  }
+}
+]

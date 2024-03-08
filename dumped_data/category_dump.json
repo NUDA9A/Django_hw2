@@ -1,0 +1,26 @@
+[
+{
+  "model": "main.category",
+  "pk": 1,
+  "fields": {
+    "name": "Мясо",
+    "description": "продукт"
+  }
+},
+{
+  "model": "main.category",
+  "pk": 2,
+  "fields": {
+    "name": "Фрукты",
+    "description": "еда"
+  }
+},
+{
+  "model": "main.category",
+  "pk": 3,
+  "fields": {
+    "name": "Овощи",
+    "description": "Еда"
+  }
+}
+]
