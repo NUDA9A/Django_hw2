@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Магазинчик</h1>
+    <p class="lead">Магазинчик - это так себе вариант купить продукты</p>
+</div>
+<div class="row text-center">
+    {% for object in objects_list %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img src="{{object.image.url}}"
+                     width="350"
+                     height="350">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Категория: {{object.category}}</li>
+                        <li>Цена: {{object.price}}руб.</li>
+                    </ul>
+                    <a href="product/{{object.pk}}" class="btn btn-lg btn-block btn-outline-primary">Посмотреть</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
