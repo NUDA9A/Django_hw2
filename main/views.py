@@ -21,3 +21,4 @@ def product(request, pk):
     }
 
     return render(request, 'main/product.html', context)
+
