@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+{% load filters %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Блог Магазинчика</h1>
+</div>
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'main:create_blog' %}">Добавить блог</a>
+</div>
+<div class="row text-center">
+    {% for object in object_list %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img src="{{object.preview|my_media}}"
+                     width="350"
+                     height="350">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{object.title}}</h4>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Содержание: {{object.body|truncatechars:100}}</li>
+                        <li>Просмотры: {{object.views_count}}</li>
+                    </ul>
+                    <a href="{% url 'main:blog' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Почитать</a>
+                    <a href="{% url 'main:edit_blog' object.pk %}" class="btn btn-lg btn-block btn-primary">Изменить</a>
+                    <a href="{% url 'main:delete_blog' object.pk %}" class="btn btn-lg btn-block btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
