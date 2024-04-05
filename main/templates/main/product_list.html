@@ -5,6 +5,9 @@
     <h1 class="display-4">Магазинчик</h1>
     <p class="lead">Магазинчик - это так себе вариант купить продукты</p>
 </div>
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'main:create_product' %}">Добавить Продукт</a>
+</div>
 <div class="row text-center">
     {% for object in object_list %}
         <div class="col-md-4">
@@ -21,7 +24,20 @@
                         <li>Цена: {{object.price}}руб.</li>
                         <li>Описание: {{object.description|truncatechars:100}}</li>
                     </ul>
-                    <a href="product/{{object.pk}}" class="btn btn-lg btn-block btn-outline-primary">Посмотреть</a>
+                    {% if object.versions.all %}
+                    {% for version in object.versions.all %}
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        {% if version.is_active %}
+                        <li>Версия: {{version.name}} {{version.version}} </li>
+                        {% endif %}
+                    </ul>
+                    {% endfor %}
+                    {% else %}
+                        <li>Нет активной версии</li>
+                    {% endif %}
+                    <a href="{% url 'main:product' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Посмотреть</a>
+                    <a href="{% url 'main:edit_product' object.pk %}" class="btn btn-lg btn-block btn-primary">Изменить</a>
+                    <a href="{% url 'main:delete_product' object.pk %}" class="btn btn-lg btn-block btn-danger">Удалить</a>
                 </div>
             </div>
         </div>

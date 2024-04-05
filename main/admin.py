@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import Category, Product, Blog
+from main.models import Category, Product, Blog, Version
 
 
 @admin.register(Category)
@@ -18,4 +18,10 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'body', 'views_count', 'slug')
-    list_filte = ('is_published',)
+    list_filter = ('is_published',)
+
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('version', 'name',)
+    list_filter = ('is_active', 'product',)
