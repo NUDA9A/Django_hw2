@@ -3,5 +3,15 @@
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="{% url 'main:catalog' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'main:blogs' %}">Блоги</a>
+        {% if user.is_authenticated %}
+            <form action="{% url 'users:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="p-2 btn btn-outline-danger">Выйти</button>
+            </form>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:profile' %}">Профиль</a>
+        {% else %}
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти</a>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Зарегистрироваться</a>
+        {% endif %}
     </nav>
 </div>
