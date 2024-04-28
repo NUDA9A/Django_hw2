@@ -29,6 +29,12 @@ class ProductForm(StyleForm, forms.ModelForm):
             return cleaned_data
 
 
+class ProductManagerForm(StyleForm, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+
+
 class VersionForm(StyleForm, forms.ModelForm):
     model = Version
     fields = '__all__'

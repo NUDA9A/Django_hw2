@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.utils.text import slugify
 
-from main.forms import ProductForm, VersionForm
+from main.forms import ProductForm, VersionForm, ProductManagerForm
 from main.models import Product, Blog, Version
 
 
@@ -49,8 +49,16 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
-    form_class = ProductForm
+    # form_class = ProductForm
     success_url = reverse_lazy('main:catalog')
+
+    def get_form_class(self):
+        user = self.request.user
+        if user.has_perm('main.set_published_status'):
+            return ProductManagerForm
+        if user == self.object.owner or user.is_superuser:
+            return ProductForm
+        raise PermissionError
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

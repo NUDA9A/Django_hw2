@@ -10,6 +10,7 @@
 </div>
 <div class="row text-center">
     {% for object in object_list %}
+    {% if object.is_published or perms.main.set_published_status or object.owner == user %}
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img src="{{object.image|my_media}}"
@@ -23,6 +24,11 @@
                         <li>Категория: {{object.category}}</li>
                         <li>Цена: {{object.price}}руб.</li>
                         <li>Описание: {{object.description|truncatechars:100}}</li>
+                        {% if object.is_published %}
+                        <li>Статус публикации: Опубликовано</li>
+                        {% else %}
+                        <li>Статус публикации: На модерации</li>
+                        {% endif %}
                     </ul>
                     {% if object.versions.all %}
                     {% for version in object.versions.all %}
@@ -36,11 +42,14 @@
                         <li>Нет активной версии</li>
                     {% endif %}
                     <a href="{% url 'main:product' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Посмотреть</a>
+                    {% if object.owner == user or perms.main.set_published_status %}
                     <a href="{% url 'main:edit_product' object.pk %}" class="btn btn-lg btn-block btn-primary">Изменить</a>
+                    {% endif %}
                     <a href="{% url 'main:delete_product' object.pk %}" class="btn btn-lg btn-block btn-danger">Удалить</a>
                 </div>
             </div>
         </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
