@@ -54,10 +54,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         user = self.request.user
-        if user.has_perm('main.set_published_status'):
-            return ProductManagerForm
         if user == self.object.owner or user.is_superuser:
             return ProductForm
+        if user.has_perm('main.set_published_status'):
+            return ProductManagerForm
         raise PermissionError
 
     def get_context_data(self, **kwargs):
