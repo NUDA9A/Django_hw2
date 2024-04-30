@@ -35,6 +35,12 @@ class ProductManagerForm(StyleForm, forms.ModelForm):
         fields = ('description', 'category', 'is_published')
 
 
+class SuperUserForm(StyleForm, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+
 class VersionForm(StyleForm, forms.ModelForm):
     model = Version
     fields = '__all__'

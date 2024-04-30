@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.utils.text import slugify
 
-from main.forms import ProductForm, VersionForm, ProductManagerForm
+from main.forms import ProductForm, VersionForm, ProductManagerForm, SuperUserForm
 from main.models import Product, Blog, Version
 
 
@@ -54,8 +54,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_class(self):
         user = self.request.user
-        if user == self.object.owner or user.is_superuser:
+        if user == self.object.owner:
             return ProductForm
+        if user.is_superuser:
+            return SuperUserForm
         if user.has_perm('main.set_published_status'):
             return ProductManagerForm
         raise PermissionError
