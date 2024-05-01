@@ -3,6 +3,7 @@
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="{% url 'main:catalog' %}">Каталог</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'main:blogs' %}">Блоги</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'main:category_list' %}">Категории</a>
         {% if user.is_authenticated %}
             <form action="{% url 'users:logout' %}" method="post">
                 {% csrf_token %}

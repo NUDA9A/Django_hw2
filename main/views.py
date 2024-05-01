@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -6,7 +8,17 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.utils.text import slugify
 
 from main.forms import ProductForm, VersionForm, ProductManagerForm, SuperUserForm
-from main.models import Product, Blog, Version
+from main.models import Product, Blog, Version, Category
+from main.services import get_cached_categories_list
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['categories'] = get_cached_categories_list(self)
+        return context_data
 
 
 class ProductListView(LoginRequiredMixin, ListView):
